@@ -29,6 +29,7 @@ SetACTState:
 	ldr	message,=PropertyInfo
 
 	str	state,	[message, #0x18] /*set state*/
+	mov	r1,	#8
 
 	.unreq	state
 	.unreq	message
