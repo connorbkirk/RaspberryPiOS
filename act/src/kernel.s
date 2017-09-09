@@ -7,8 +7,21 @@ _start:
 
 .section .text
 main:
+	bl	stall
 	mov	r0,	#1
 	bl	SetACTState
 
-hang:
-	b	hang
+	bl	stall
+	mov	r0,	#0
+	bl	SetACTState
+	
+	b	main
+
+stall:
+	mov	r0,	#0xf0000
+	loop:
+		sub	r0,	#1
+		cmp	r0,	#0
+		bne	loop
+	mov	pc,	lr
+	

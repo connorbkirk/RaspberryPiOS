@@ -34,7 +34,7 @@ $(BUILD)kernel.elf: $(OBJECTS) $(LINK_SCRIPT)
 
 # Rule to make the object files
 $(BUILD)%.o: $(SOURCE)%.s $(BUILD)
-	$(ARMGNU)-as $< -o $@
+	$(ARMGNU)-as $< -o $@ -g
 
 # Rule to make the listing file.
 $(LIST): $(BUILD)kernel.elf

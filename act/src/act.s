@@ -28,6 +28,12 @@ SetACTState:
 	message	.req	r0
 	ldr	message,=PropertyInfo
 
+	mov	r3,	#0
+	str	r3,	[message,#0x4] /*set req code*/
+	str	r3,	[message,#0x10] /*set req/resp size*/
+	mov	r3,	#130
+	str	r3,	[message,#0x14] /*reset pin number*/
+
 	str	state,	[message, #0x18] /*set state*/
 	mov	r1,	#8
 
@@ -35,5 +41,8 @@ SetACTState:
 	.unreq	message
 
 	bl	MBWrite
+
+	mov	r0,	#8
+	bl	MBRead
 	
 	pop	{pc}
