@@ -28,5 +28,5 @@ void set_act_state(uint32_t state){
 
 	mailbox_write(&body, ACT_CHANNEL);
 
-//	mailbox_read(ACT_CHANNEL);
+	mailbox_read(ACT_CHANNEL);
 }

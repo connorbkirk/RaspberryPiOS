@@ -10,7 +10,7 @@ void mailbox_write(void * message, uint32_t channel){
 	vuint32_t status;
 
         do{
-                status = READ32(MAILBOX + STATUS_OFFSET);
+                status = READ32((MAILBOX + STATUS_OFFSET));
         }while( (status & FULL) != 0 );
 
 	message += channel;
@@ -20,12 +20,12 @@ void mailbox_write(void * message, uint32_t channel){
 
 uint32_t mailbox_read(uint32_t channel){
 	vuint32_t status;
-	vuint32_t mail;
+	uint32_t mail;
 	
 	do{
 		do{
-			status = READ32(MAILBOX + STATUS_OFFSET);
-		}while( (status & EMPTY) != 0 );
+			status = READ32((MAILBOX + STATUS_OFFSET));
+		}while( (status & EMPTY) != 0);
 
 		mail = READ32(MAILBOX);
 		
