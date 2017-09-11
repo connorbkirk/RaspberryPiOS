@@ -1,1 +1,2 @@
-void mailbox_write(void * message, vuint32_t channel);
+void mailbox_write(void * message, uint32_t channel);
+uint32_t mailbox_read(uint32_t channel);

@@ -15,7 +15,7 @@ struct msg_body{
         vuint32_t end;
 } __attribute__((aligned(16)));
 
-void set_act_state(vuint32_t state){
+void set_act_state(uint32_t state){
 	struct msg_body body;
         body.sz = 32;
         body.req_code = 0;
@@ -23,8 +23,10 @@ void set_act_state(vuint32_t state){
         body.val_size = 8;
         body.resp_size = 0;
         body.pin_no = 130;
-        body.pin_state = 1;
+        body.pin_state = state;
         body.end = 0;
 
 	mailbox_write(&body, ACT_CHANNEL);
+
+//	mailbox_read(ACT_CHANNEL);
 }
