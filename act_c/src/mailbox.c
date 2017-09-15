@@ -1,33 +1,31 @@
 #include "types.h"
+#include "basic-hw.h"
 
-#define MAILBOX 0x3f00b880
 #define FULL 0x80000000
 #define EMPTY 0x40000000
-#define W_OFFSET 0x20
-#define STATUS_OFFSET 0x18
 
-void mailbox_write(void * message, uint32_t channel){
-	vuint32_t status;
+void mailbox_write(uint32_t message, MAILBOX_CHANNEL channel){
+	uint32_t status;
 
         do{
-                status = READ32((MAILBOX + STATUS_OFFSET));
+                status = MAILBOX->status1;
         }while( (status & FULL) != 0 );
 
 	message += channel;
-
-	WRITE32(MAILBOX + W_OFFSET, message);
+	
+	MAILBOX->write1 = message;
 }
 
-uint32_t mailbox_read(uint32_t channel){
-	vuint32_t status;
+uint32_t mailbox_read(MAILBOX_CHANNEL channel){
+	uint32_t status;
 	uint32_t mail;
 	
 	do{
 		do{
-			status = READ32((MAILBOX + STATUS_OFFSET));
+			status = MAILBOX->status0;	
 		}while( (status & EMPTY) != 0);
 
-		mail = READ32(MAILBOX);
+		mail = MAILBOX->read0;
 		
 	}while( (mail & 0b1111) != channel );
 
