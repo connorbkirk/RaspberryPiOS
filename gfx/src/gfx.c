@@ -9,7 +9,7 @@ typedef struct ConsoleData_t{
 	FrameBuffer fb;
 } ConsoleData_t;
 
-ConsoleData_t console = {0}; 
+ConsoleData_t console; 
 
 void memcpy(uint8_t * d, uint8_t * s, uint32_t len){
 	while(--len){
@@ -119,8 +119,8 @@ bool console_init(){
 	height = message[6];	
 	
 	if(height == 0 || width == 0){
-		height = 1280;
-		width = 1024;
+		height = 1024;
+		width = 640;
 	}
 
 	depth = 32;
@@ -128,6 +128,9 @@ bool console_init(){
 	if( !allocFrameBuffer(width, height, depth, &console.fb) ){
 		return false;
 	}
+
+	console.x = 0;
+	console.y = 0;
 
 	return true;
 }

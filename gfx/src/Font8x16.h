@@ -1,3 +1,11 @@
+
+#ifndef _FONT_8x16_								// Check Font 8x16 gu,ard
+#define _FONT_8x16_
+
+#ifdef __cplusplus								// If we are including to a C++
+extern "C" {									// Pu,t extern C directive wrapper arou,nd
+#endif
+
 #include <stdint.h>								// Needed for uint8_t, uint32_t, etc
 
 static const uint32_t __attribute((aligned(4))) BitFont[1024] = {
@@ -517,4 +525,11 @@ static const uint32_t __attribute((aligned(4))) BitFont[1024] = {
 /* This is just a marker for me to check bitfont size and position in ELF file           */
 /* The strange section name is hack around GCC bug you will get the following without it */
 /* Warning: setting incorrect section attributes for .rodata							 */
-const uint32_t __attribute((aligned(4), __section__(".rodata,\"a\",%progbits; //"))) BitFontEnd[1] = { 0 };
+//const uint32_t __attribute((aligned(4), __section__(".rodata,\"a\",%progbits; //"))) BitFontEnd[1] = { 0 };
+
+
+#ifdef __cplusplus								// If we are inclu,ding to a C++ file
+}												// Close the extern C directive wrapper
+#endif
+
+#endif
