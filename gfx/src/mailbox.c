@@ -8,13 +8,15 @@ void mailbox_write(uint32_t * message_addr, MAILBOX_CHANNEL channel){
 	uint32_t status;
 	uintptr_t message = (uintptr_t)message_addr;
 
+	//message |= 0xC0000000;//bus mask
+
         do{
                 status = MAILBOX->status1;
         }while( (status & FULL) != 0 );
 
 	message &= ~(0xF);
 	message |= channel;
-	
+
 	MAILBOX->write1 = (vuint32_t)message;
 }
 

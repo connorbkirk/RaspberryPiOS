@@ -17,7 +17,7 @@ void memcpy(uint8_t * d, uint8_t * s, uint32_t len){
 	}
 }
 
-static void write_char_32(FrameBuffer * fb, uint32_t x1, uint32_t y1, uint8_t ch){
+void write_char_32(FrameBuffer * fb, uint32_t x1, uint32_t y1, uint8_t ch){
 	RGBA * __attribute__((aligned(4))) video_wr_ptr = (RGBA*)(uintptr_t)(fb->buffer + y1*fb->width*4 + x1*4);
 	int y;
 	int i;
@@ -25,12 +25,14 @@ static void write_char_32(FrameBuffer * fb, uint32_t x1, uint32_t y1, uint8_t ch
 		uint32_t b = BitFont[ 4*ch + y ];
 		for(i = 0; i < 32; i++){
 			RGBA col = fb->bgColor;
+			
 			int xoffs = i % 8;
 			if((b & 0x80000000) != 0){
 				col = fb->fontColor;
 			}
 			
 			video_wr_ptr[xoffs] = col;
+
 			b <<= 1;
 			if(xoffs == 7){
 				video_wr_ptr += fb->width;
@@ -39,7 +41,7 @@ static void write_char_32(FrameBuffer * fb, uint32_t x1, uint32_t y1, uint8_t ch
 	}
 }
 
-static bool allocFrameBuffer(int32_t width, int32_t height, int32_t depth, FrameBuffer * fb){
+bool allocFrameBuffer(int32_t width, int32_t height, int32_t depth, FrameBuffer * fb){
 	uint32_t __attribute__((aligned(16))) message[22];
 	if(!fb){
 		return false;
@@ -80,11 +82,13 @@ static bool allocFrameBuffer(int32_t width, int32_t height, int32_t depth, Frame
 
 	mailbox_write(message, MB_CH_TAGS);
 	mailbox_read(MB_CH_TAGS);
+	
 	if((message[1] != 0x80000000) || (message[18] != 0x80000008)){
 		return false;
 	}
 
-	fb->buffer = message[19] & ~(0x40000000);
+	fb->buffer = (message[19] & ~(0xC0000000));
+	fb->size = message[20];
 	
 	fb->bitfont = (uintptr_t)&BitFont[0];
 	fb->fontWth = 8;
@@ -121,7 +125,11 @@ bool console_init(){
 
 	depth = 32;
 	
-	return( allocFrameBuffer(width, height, depth, &console.fb) );
+	if( !allocFrameBuffer(width, height, depth, &console.fb) ){
+		return false;
+	}
+
+	return true;
 }
 
 void console_write(char ch){
@@ -144,6 +152,13 @@ void console_write(char ch){
 			console.x++;
 			break;
 		}
+	}
+}
+
+void console_test(){
+	int i;
+	for(i = 0; i < console.fb.size; i+=4){
+		*(vuint32_t *)(console.fb.buffer + i) = 0xFFFF;
 	}
 }
 

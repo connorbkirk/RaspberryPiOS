@@ -10,6 +10,7 @@ typedef struct __attribute__((__packed__, aligned(1))) RGBA {
 
 typedef struct FrameBuffer{
         uint32_t        buffer;         //frame buffer address
+	uint32_t	size;		//frame buffer size
         int32_t         width;          //phys width
         int32_t         height;         //phys height
         int32_t         depth;          //color depth
@@ -28,3 +29,5 @@ typedef struct FrameBuffer{
 
 bool console_init();
 void console_write(char ch);
+void console_test();
+void write(char * str);
