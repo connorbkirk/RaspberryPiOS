@@ -9,7 +9,6 @@ void wait(){
 
 int main(void){
 	int i;
-//	char spin[4] = {'|', '/', '-', '\\' };
 
 	for(i = 0; i < 5; i++){	
 		set_act_state(1);
@@ -23,79 +22,11 @@ int main(void){
 	wait();
 	wait();
 
-	console_test();
-	wait();
-	wait();
+//	console_test();
+//	wait();
+//	wait();
 	
-	console_write('H');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('E');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('L');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('L');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('O');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write(' ');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('W');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('O');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('R');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('L');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('D');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-	console_write('\n');
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-		set_act_state(1);
-		wait();
-		set_act_state(0);
-		wait();
-
+	console_write("Hello world", 11);
 
 	while(1);
 

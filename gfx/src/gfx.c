@@ -135,8 +135,12 @@ bool console_init(){
 	return true;
 }
 
-void console_write(char ch){
+void console_draw(char ch){
 	switch(ch){
+		case ' ':{
+			console.x++;
+			break;
+		}
 		case '\r':{
 			console.x = 0;
 			break;
@@ -155,6 +159,13 @@ void console_write(char ch){
 			console.x++;
 			break;
 		}
+	}
+}
+
+void console_write(const char * str, int length){
+	int i;
+	for(i = 0; i < length; i++){
+		console_draw(str[i]);
 	}
 }
 

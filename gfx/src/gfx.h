@@ -28,6 +28,5 @@ typedef struct FrameBuffer{
 } FrameBuffer;
 
 bool console_init();
-void console_write(char ch);
+void console_write(const char* ch, int length);
 void console_test();
-void write(char * str);
