@@ -2,6 +2,7 @@
 #define MAILBOX_H
 
 #include "types.h"
+#include "hw.h"
 
 typedef enum {
 	/* Videocore info commands */
@@ -139,7 +140,7 @@ struct __attribute__((__packed__, aligned(4))) MailboxRegisters{
 	vuint32_t 	config1;	//0x3c
 };
 
-#define MAILBOX ((volatile __attribute__((aligned(4))) struct MailboxRegisters*)(uintptr_t)(0x3f00b880))
+#define MAILBOX ((volatile __attribute__((aligned(4))) struct MailboxRegisters*)(uintptr_t)(PERIPHERAL_BASE + 0xb880))
 
 void mailbox_write(uint32_t * message, MAILBOX_CHANNEL channel);
 uint32_t mailbox_read(MAILBOX_CHANNEL channel);
