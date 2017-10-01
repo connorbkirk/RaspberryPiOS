@@ -17,10 +17,7 @@ int main(void){
 		wait(0xf000);
 	}
 
-	console_write("Turning on interrupts", 21);
-	wait(0xf000);
-	enable_interrupts();
-	console_write("DONE", 4);
+	console_write("hello world!", 12);
 
 	while(1);
 
