@@ -68,7 +68,30 @@ size_t   strspn(const char *str1, const char *str2){
 	return 0;
 }
 char    *strstr(const char *haystack, const char *needle){
-	return 0;
+	if(!*needle){
+        	return 0;
+    	}
+    
+    	int count;
+    	char * h = (char*)haystack;
+    	char * n;
+    
+    	while(*h){
+        	n = (char*)needle;
+        	count = 0;
+        
+        	while( *n && *(h+count) && *n == *(h+count) ){
+           		count++;
+           		n++;
+        	}
+        
+        	if(!*n){
+            		return h-haystack;
+        	}
+        
+        	h++;
+    	}
+    	return -1;
 }
 char    *strtok(char *str, const char *delim){
 	return 0;
