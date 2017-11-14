@@ -9,5 +9,6 @@ arm-none-eabi-gcc -Wall -Werror -nostdlib -nostartfiles -ffreestanding -c src/gf
 arm-none-eabi-gcc -Wall -Werror -nostdlib -nostartfiles -ffreestanding -c src/time.c -o build/time.o -g
 arm-none-eabi-gcc -Wall -Werror -nostdlib -nostartfiles -ffreestanding -c src/interrupts.c -o build/interrupts.o -g
 arm-none-eabi-gcc -Wall -Werror -nostdlib -nostartfiles -ffreestanding -c src/memory.c -o build/memory.o -g
-arm-none-eabi-ld build/start.o build/main.o build/act.o build/mailbox.o build/gfx.o build/time.o build/interrupts.o -T ldscript -o main.elf
+arm-none-eabi-gcc -Wall -Werror -nostdlib -nostartfiles -ffreestanding -c src/lib/string.c -o build/string.o -g
+arm-none-eabi-ld build/start.o build/main.o build/act.o build/mailbox.o build/gfx.o build/time.o build/string.o build/memory.o build/interrupts.o -T ldscript -o main.elf
 arm-none-eabi-objcopy main.elf -O binary kernel.img

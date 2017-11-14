@@ -1,6 +1,6 @@
 #include "../types.h"
 
-void memcpy(char * d, char * s, int len);
+void 	memcpy(char * d, char * s, int len);
 
 void    *memccpy(void *, const void *, int, size_t);
 void    *memchr(const void *, int, size_t);

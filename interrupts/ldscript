@@ -7,4 +7,9 @@ SECTIONS
 {
 	.text : { *(.text*) } > ram
 	.bss : { *(.bss*) } > ram
+
+	.heap : {
+		. = ALIGN(4);
+		kernel_end = .;
+	}
 }
