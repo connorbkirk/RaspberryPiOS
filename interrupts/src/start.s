@@ -2,17 +2,17 @@
 
 _start:
 _reset_:
-	ldr	r0,	=_vectors
+	ldr	r0,	=_isr_vector
 	mov	r1,	#0x0000
-	ldmia	r0!,	{r2,r3,r4,r5,r6,r7,r8,r9}
-	stmia	r1!,	{r2,r3,r4,r5,r6,r7,r8,r9}
+	ldmia	r0!,	{r2,r3,r4,r5,r6,r7,r8,r9} //load vector items into r2-r9
+	stmia	r1!,	{r2,r3,r4,r5,r6,r7,r8,r9} //store r2-r9 into 0x0000
 	ldmia	r0!,	{r2,r3,r4,r5,r6,r7,r8,r9}
 	stmia	r1!,	{r2,r3,r4,r5,r6,r7,r8,r9}
 
 	mov	sp,	#0x8000
 	b	main
 
-_vectors:
+_isr_vector:
         ldr     pc,     _reset_h
         ldr     pc,     _undef_instr_h
         ldr     pc,     _sw_interrupt_h
