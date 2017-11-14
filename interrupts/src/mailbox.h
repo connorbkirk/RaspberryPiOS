@@ -144,5 +144,6 @@ struct __attribute__((__packed__, aligned(4))) MailboxRegisters{
 
 void mailbox_write(uint32_t * message, MAILBOX_CHANNEL channel);
 uint32_t mailbox_read(MAILBOX_CHANNEL channel);
+bool mailbox_tag_message(uint32_t * response_buffer, uint8_t data_count, ...);
 
 #endif
