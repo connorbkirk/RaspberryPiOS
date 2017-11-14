@@ -2,8 +2,7 @@
 #include "act.h"
 #include "gfx.h"
 #include "time.h"
-
-extern void enable_interrupts();
+#include "interrupts.h"
 
 int main(void){
 	int i;
@@ -21,8 +20,9 @@ int main(void){
 	wait(0xf000);
 	enable_interrupts();
 	console_write("DONE\n", 5);
+	enable_timer_irq();
+	set_time_irq(10000000);
 	
-
 	while(1);
 
 }

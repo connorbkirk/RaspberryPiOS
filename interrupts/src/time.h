@@ -27,4 +27,4 @@ struct __attribute__((__packed__, aligned(4))) ArmTimerRegisters{
 void wait(uint32_t time);
 void clear_time_irq();
 uint32_t get_time_cycle();
-
+void set_time_irq(uint32_t time);
