@@ -17,10 +17,11 @@ int main(void){
 		wait(0xf000);
 	}
 
-	console_write("Turning on interrupts", 21);
+	console_write("Turning on interrupts\n", 22);
 	wait(0xf000);
 	enable_interrupts();
-	console_write("DONE", 4);
+	console_write("DONE\n", 5);
+	
 
 	while(1);
 

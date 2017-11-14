@@ -2,6 +2,7 @@
 #include "mailbox.h"
 #include "Font8x16.h"
 #include "gfx.h"
+#include "lib/string.h"
 
 typedef struct ConsoleData_t{
 	int32_t x;		//cursor column
@@ -10,12 +11,6 @@ typedef struct ConsoleData_t{
 } ConsoleData_t;
 
 ConsoleData_t console; 
-
-void memcpy(uint8_t * d, uint8_t * s, uint32_t len){
-	while(--len){
-		*d++ = *s++;
-	}
-}
 
 void write_char_32(FrameBuffer * fb, uint32_t x1, uint32_t y1, uint8_t ch){
 	RGBA * __attribute__((aligned(4))) video_wr_ptr = (RGBA*)(uintptr_t)(fb->buffer + y1*fb->width*4 + x1*4);
