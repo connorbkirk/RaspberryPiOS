@@ -52,4 +52,4 @@ void wait(uint32_t time);
 void clear_time_irq();
 uint32_t get_time_cycle();
 void set_time_irq(uint32_t time);
-void armtimer_init(unsigned ticks);
+void armtimer_init();
